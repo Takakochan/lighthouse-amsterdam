@@ -3,10 +3,12 @@ body {
     background: #000;
 }
 
+
 /* Hide navbar and footer on home landing */
+
 body.landing-page .navbar,
 body.landing-page footer,
-body.landing-page main > *:not(#intro-overlay):not(#landing-screen):not(.cursor-gif) {
+body.landing-page main>*:not(#intro-overlay):not(#landing-screen):not(.cursor-gif) {
     display: none !important;
 }
 
@@ -21,19 +23,23 @@ body.landing-page main > *:not(#intro-overlay):not(#landing-screen):not(.cursor-
 
 .card {
     border: none;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 footer {
     font-size: 0.9rem;
 }
 
+
 /* ── Landing page ── */
+
 .landing-hero {
     padding: 6rem 1rem 4rem;
 }
 
+
 /* ── Intro overlay ── */
+
 #intro-overlay {
     position: fixed;
     inset: 0;
@@ -66,7 +72,9 @@ footer {
     transition: opacity 1s ease;
 }
 
+
 /* ── Skip intro button ── */
+
 #skip-intro {
     position: absolute;
     bottom: 2rem;
@@ -87,7 +95,9 @@ footer {
     opacity: 1;
 }
 
+
 /* ── Landing screen ── */
+
 #landing-screen {
     display: none;
     position: fixed;
@@ -113,7 +123,9 @@ footer {
     transition: opacity 1.5s ease;
 }
 
+
 /* ── Corner navigation ── */
+
 #corner-nav {
     position: absolute;
     inset: 0;
@@ -126,8 +138,8 @@ footer {
     border: none;
     color: #fff;
     font-family: 'Nunito', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: Bold;
     letter-spacing: 0.12em;
     text-decoration: none;
     opacity: 0.8;
@@ -142,12 +154,29 @@ footer {
     color: #fff;
 }
 
-.corner-btn.top-left     { top: 2rem;    left: 2rem;  }
-.corner-btn.top-right    { top: 2rem;    right: 2rem; }
-.corner-btn.bottom-left  { bottom: 2rem; left: 2rem;  }
-.corner-btn.bottom-right { bottom: 2rem; right: 2rem; }
+.corner-btn.top-left {
+    top: 2rem;
+    left: 2rem;
+}
+
+.corner-btn.top-right {
+    top: 2rem;
+    right: 2rem;
+}
+
+.corner-btn.bottom-left {
+    bottom: 2rem;
+    left: 2rem;
+}
+
+.corner-btn.bottom-right {
+    bottom: 2rem;
+    right: 2rem;
+}
+
 
 /* ── Custom cursor GIFs ── */
+
 * {
     cursor: none;
 }
