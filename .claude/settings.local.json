@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip3 show:*)",
+      "Bash(django-admin startproject:*)",
+      "Bash(python3 manage.py startapp accounts)",
+      "Bash(python3 manage.py startapp poems)",
+      "Bash(python3 manage.py startapp events)",
+      "Bash(python3 manage.py startapp newsletter)",
+      "Bash(python3 manage.py makemigrations)",
+      "Bash(python3 manage.py migrate)",
+      "Bash(python3 manage.py check)",
+      "Bash(heroku --version)",
+      "Bash(heroku apps:*)",
+      "Bash(python3 -c \"import sys,json; apps=json.load\\(sys.stdin\\); [print\\(a['name']\\) for a in apps]\")",
+      "Bash(heroku auth:whoami:*)",
+      "Bash(heroku git:remote -a lighthousetemp)",
+      "Bash(heroku config:*)",
+      "Bash(heroku create:*)",
+      "Bash(heroku git:remote -a lighthouse-amsterdam-fred)",
+      "Bash(heroku auth:token)",
+      "Bash(tar -czf /tmp/lighthouse-deploy.tar.gz --exclude='.git' --exclude='db.sqlite3' --exclude='__pycache__' --exclude='*.pyc' .)",
+      "Read(//tmp/**)",
+      "Bash(heroku builds:create:*)",
+      "Bash(heroku plugins:install heroku-builds)",
+      "Bash(heroku help:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(heroku logs:*)",
+      "Bash(heroku releases:*)",
+      "Bash(heroku builds:info -a lighthouse-amsterdam-fred)",
+      "Bash(heroku buildpacks:*)",
+      "Bash(heroku buildpacks:set:*)"
+    ]
+  }
+}

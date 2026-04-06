@@ -1,5 +1,13 @@
 body {
     font-family: 'Georgia', serif;
+    background: #000;
+}
+
+/* Hide navbar and footer on home landing */
+body.landing-page .navbar,
+body.landing-page footer,
+body.landing-page main > *:not(#intro-overlay):not(#landing-screen):not(.cursor-gif) {
+    display: none !important;
 }
 
 .navbar-brand {
@@ -119,6 +127,7 @@ footer {
     color: #fff;
     font-family: 'Century Gothic', 'CenturyGothic', 'AppleGothic', sans-serif;
     font-size: 0.95rem;
+    font-weight: bold;
     letter-spacing: 0.12em;
     text-decoration: none;
     opacity: 0.8;
