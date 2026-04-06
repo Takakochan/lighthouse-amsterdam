@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Lighthouse Amsterdam{% endblock %}
+
+{% block content %}
+
+<!-- Intro overlay: black → star image → video -->
+<div id="intro-overlay">
+    <div id="intro-bg-image"></div>
+    <video id="intro-video" src="https://res.cloudinary.com/dxuuvs8fm/video/upload/v1775422276/intro_video_8_sec_falling_star_until_poem_x5gdjw.mp4"
+        playsinline muted></video>
+    <button id="skip-intro">Skip intro</button>
+</div>
+
+<!-- Landing screen: back1 + galaxy overlay + corner nav -->
+<div id="landing-screen">
+    <div id="landing-bg"></div>
+    <img id="galaxy-overlay" src="{% static 'images/galaxy.png' %}" alt="">
+    <nav id="corner-nav">
+        <a href="{% url 'event_list' %}" class="corner-btn top-left">Events</a>
+        <a href="#contact" class="corner-btn top-right">Contact</a>
+        <a href="{% url 'home' %}" class="corner-btn bottom-left">Home</a>
+        <button class="corner-btn bottom-right" id="back-btn">Back</button>
+    </nav>
+</div>
+
+<!-- Custom cursor GIFs -->
+<img src="{% static 'images/left.gif' %}" id="cursor-left" class="cursor-gif" alt="">
+<img src="{% static 'images/right.gif' %}" id="cursor-right" class="cursor-gif" alt="">
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+    const introOverlay  = document.getElementById('intro-overlay');
+    const introBgImage  = document.getElementById('intro-bg-image');
+    const video         = document.getElementById('intro-video');
+    const skipBtn       = document.getElementById('skip-intro');
+    const landingScreen = document.getElementById('landing-screen');
+    const galaxyOverlay = document.getElementById('galaxy-overlay');
+    const backBtn       = document.getElementById('back-btn');
+    const cursorLeft    = document.getElementById('cursor-left');
+    const cursorRight   = document.getElementById('cursor-right');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let gifX = mouseX, gifY = mouseY, prevGifX = gifX;
+    let currentDirection = null;
+    let cursorReady = false;
+
+    // ── Intro sequence ──────────────────────────────────────────
+    // Phase 1: 1s black
+    // Phase 2: star image fades in, hold 2s
+    // Phase 3: video fades in, plays
+    // Phase 4: video ends → landing screen (back1 + galaxy)
+
+    function showLanding() {
+        // Fade out intro overlay
+        introOverlay.classList.add('fade-out');
+        setTimeout(function () {
+            introOverlay.style.display = 'none';
+        }, 800);
+
+        // Show landing screen: back1 first
+        landingScreen.style.display = 'block';
+        setTimeout(function () {
+            landingScreen.style.opacity = '1';
+            // After 2s on back1, fade in galaxy
+            setTimeout(function () {
+                galaxyOverlay.style.opacity = '1';
+            }, 2000);
+        }, 50);
+    }
+
+    function startVideo() {
+        introBgImage.style.opacity = '0';
+        video.style.opacity = '1';
+        video.play();
+        video.addEventListener('ended', showLanding);
+    }
+
+    function showStarImage() {
+        introBgImage.style.opacity = '1';
+        setTimeout(startVideo, 2000);
+    }
+
+    function skipAll() {
+        video.pause();
+        introOverlay.style.display = 'none';
+        landingScreen.style.display = 'block';
+        setTimeout(function () {
+            landingScreen.style.opacity = '1';
+            setTimeout(function () {
+                galaxyOverlay.style.opacity = '1';
+            }, 2000);
+        }, 50);
+    }
+
+    // Phase 1: 1s black, then gif + star image
+    setTimeout(function () {
+        cursorReady = true;
+        showStarImage();
+    }, 1000);
+
+    skipBtn.addEventListener('click', skipAll);
+    backBtn.addEventListener('click', function () {
+        history.back();
+    });
+
+    // ── Mouse tracking ──────────────────────────────────────────
+    document.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    const LERP = 0.1;
+
+    function animate() {
+        gifX += (mouseX - gifX) * LERP;
+        gifY += (mouseY - gifY) * LERP;
+
+        cursorLeft.style.left  = gifX + 'px';
+        cursorLeft.style.top   = gifY + 'px';
+        cursorRight.style.left = gifX + 'px';
+        cursorRight.style.top  = gifY + 'px';
+
+        if (cursorReady) {
+            const isMovingRight = gifX >= prevGifX;
+            const newDirection  = isMovingRight ? 'right' : 'left';
+
+            if (newDirection !== currentDirection) {
+                if (newDirection === 'right') {
+                    cursorRight.style.opacity = '1';
+                    cursorLeft.style.opacity  = '0';
+                } else {
+                    cursorLeft.style.opacity  = '1';
+                    cursorRight.style.opacity = '0';
+                }
+                currentDirection = newDirection;
+            }
+        }
+
+        prevGifX = gifX;
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+})();
+</script>
+{% endblock %}

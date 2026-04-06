@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ poem.title }} - Lighthouse Amsterdam{% endblock %}
+
+{% block content %}
+<article class="poem-detail mx-auto" style="max-width: 680px;">
+    <h1 class="mb-1">{{ poem.title }}</h1>
+    <p class="text-muted mb-4">by {{ poem.author.username }} · {{ poem.created_at|date:"F j, Y" }}</p>
+    <div class="poem-body fs-5 lh-lg">{{ poem.body|linebreaks }}</div>
+
+    {% if user == poem.author %}
+    <div class="mt-4 d-flex gap-2">
+        <a href="{% url 'poem_edit' poem.pk %}" class="btn btn-outline-secondary">Edit</a>
+        <a href="{% url 'poem_delete' poem.pk %}" class="btn btn-outline-danger">Delete</a>
+    </div>
+    {% endif %}
+</article>
+{% endblock %}

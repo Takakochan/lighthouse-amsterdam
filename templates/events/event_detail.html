@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ event.title }} - Lighthouse Amsterdam{% endblock %}
+
+{% block content %}
+<div class="mx-auto" style="max-width: 720px;">
+    {% if event.image %}
+    <img src="{{ event.image.url }}" class="img-fluid rounded mb-4" alt="{{ event.title }}">
+    {% endif %}
+    <h1>{{ event.title }}</h1>
+    <p class="text-muted">{{ event.date|date:"F j, Y · H:i" }} · {{ event.location }}</p>
+    <div class="fs-5 lh-lg mb-4">{{ event.description|linebreaks }}</div>
+
+    {% if event.ticket_price > 0 %}
+    <p class="fs-4">Tickets: <strong>€{{ event.ticket_price }}</strong></p>
+    {% else %}
+    <p class="fs-4 text-success">Free entry</p>
+    {% endif %}
+
+    {% if event.ticket_url %}
+    <a href="{{ event.ticket_url }}" class="btn btn-primary" target="_blank" rel="noopener">Get Tickets</a>
+    {% endif %}
+</div>
+{% endblock %}
