@@ -74,7 +74,7 @@ footer {
     background: transparent;
     border: none;
     color: #fff;
-    font-family: 'Century Gothic', 'CenturyGothic', 'AppleGothic', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 0.9rem;
     letter-spacing: 0.12em;
     cursor: none;
@@ -125,9 +125,9 @@ footer {
     background: transparent;
     border: none;
     color: #fff;
-    font-family: 'Century Gothic', 'CenturyGothic', 'AppleGothic', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 0.95rem;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 0.12em;
     text-decoration: none;
     opacity: 0.8;
